@@ -6,7 +6,8 @@ function App() {
       <div className="w-full max-w-xl space-y-6">
         <TypeWriter
           label="Questions"
-          examples={[
+          swapDelay={6000}
+          texts={[
             "1. Can I pay one-time for a lifetime access?",
             "2. How does the free trial work?",
             "3. Can I pause my membership without losing my data?",

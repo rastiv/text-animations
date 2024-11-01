@@ -2,32 +2,38 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
-const TypeWriter = ({ examples, swapDelay = 5500, label = "" }) => {
+const TypeWriter = ({ texts, swapDelay = 5500, label = "" }) => {
   const LETTER_DELAY = 0.025;
   const BOX_FADE_DURATION = 0.125;
-  const FADE_DELAY = 5;
   const MAIN_FADE_DURATION = 0.25;
 
-  const [exampleIndex, setExampleIndex] = useState(0);
+  const [textIndex, setTextIndex] = useState(0);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setExampleIndex((prev) => (prev + 1) % examples.length);
-    }, swapDelay);
+    const intervalId =
+      texts.length > 1
+        ? setInterval(
+            () => setTextIndex((prev) => (prev + 1) % texts.length),
+            swapDelay
+          )
+        : null;
+
     return () => clearInterval(intervalId);
   }, []);
+
+  if (texts.length === 0) return null;
 
   return (
     <p className="mb-2.5 uppercase">
       {label && <span className="pr-1.5">{label}:</span>}
       <span className="font-light">
-        {examples[exampleIndex].split("").map((l, i) => (
+        {texts[textIndex].split("").map((l, i) => (
           <motion.span
-            key={`${exampleIndex}-${i}`}
+            key={`${textIndex}-${i}`}
             initial={{ opacity: 1 }}
-            animate={{ opacity: 0 }}
+            animate={{ opacity: texts.length > 1 ? 0 : 1 }}
             transition={{
-              delay: FADE_DELAY,
+              delay: (swapDelay - 500) / 1000,
               duration: MAIN_FADE_DURATION,
               ease: "easeInOut",
             }}
@@ -59,7 +65,7 @@ const TypeWriter = ({ examples, swapDelay = 5500, label = "" }) => {
 };
 
 PropTypes.TypeWriter = {
-  examples: PropTypes.array.isRequired,
+  texts: PropTypes.array.isRequired,
   swapDelay: PropTypes.number,
   label: PropTypes.string,
 };
