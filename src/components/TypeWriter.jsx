@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 
 const TypeWriter = ({ examples, swapDelay = 5500, label = "" }) => {
   const LETTER_DELAY = 0.025;
@@ -55,6 +56,12 @@ const TypeWriter = ({ examples, swapDelay = 5500, label = "" }) => {
       </span>
     </p>
   );
+};
+
+PropTypes.TypeWriter = {
+  examples: PropTypes.array.isRequired,
+  swapDelay: PropTypes.number,
+  label: PropTypes.string,
 };
 
 export default TypeWriter;
