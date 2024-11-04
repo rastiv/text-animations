@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
-const TypeWriter = ({ texts, displayDelay = 0, swapDelay = 5500 }) => {
+const TypeWriter = ({
+  texts,
+  displayDelay = 0,
+  swapDelay = 5500,
+  textClassName = "font-light",
+  markerColor = "bg-neutral-950",
+}) => {
   const LETTER_DELAY = 0.025;
   const BOX_FADE_DURATION = 0.125;
   const MAIN_FADE_DURATION = 0.25;
@@ -25,7 +31,7 @@ const TypeWriter = ({ texts, displayDelay = 0, swapDelay = 5500 }) => {
 
   return (
     <p className="uppercase">
-      <span className="font-light">
+      <span className={textClassName}>
         {texts[textIndex].split("").map((l, i) => (
           <motion.span
             key={`${textIndex}-${i}`}
@@ -48,8 +54,9 @@ const TypeWriter = ({ texts, displayDelay = 0, swapDelay = 5500 }) => {
             >
               {l}
             </motion.span>
+            {console.log(markerColor, markerColor.startsWith("bg-"))}
             <motion.span
-              className="absolute bottom-[3px] left-[1px] right-0 top-[3px] bg-neutral-950"
+              className={`absolute bottom-[3px] left-[1px] right-0 top-[3px] ${markerColor}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0] }}
               transition={{
@@ -70,6 +77,8 @@ PropTypes.TypeWriter = {
   texts: PropTypes.array.isRequired,
   displayDelay: PropTypes.number,
   swapDelay: PropTypes.number,
+  textClassName: PropTypes.string,
+  markerColor: PropTypes.string,
 };
 
 export default TypeWriter;
