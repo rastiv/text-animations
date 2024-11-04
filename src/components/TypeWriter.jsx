@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
-const TypeWriter = ({ texts, swapDelay = 5500, label = "" }) => {
+const TypeWriter = ({
+  texts,
+  displayDelay = 0,
+  swapDelay = 5500,
+  label = "",
+}) => {
   const LETTER_DELAY = 0.025;
   const BOX_FADE_DURATION = 0.125;
   const MAIN_FADE_DURATION = 0.25;
@@ -24,7 +29,7 @@ const TypeWriter = ({ texts, swapDelay = 5500, label = "" }) => {
   if (texts.length === 0) return null;
 
   return (
-    <p className="mb-2.5 uppercase">
+    <p className="uppercase">
       {label && <span className="pr-1.5">{label}:</span>}
       <span className="font-light">
         {texts[textIndex].split("").map((l, i) => (
@@ -42,7 +47,10 @@ const TypeWriter = ({ texts, swapDelay = 5500, label = "" }) => {
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: i * LETTER_DELAY, duration: 0 }}
+              transition={{
+                delay: displayDelay / 1000 + i * LETTER_DELAY,
+                duration: 0,
+              }}
             >
               {l}
             </motion.span>
@@ -51,7 +59,7 @@ const TypeWriter = ({ texts, swapDelay = 5500, label = "" }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0] }}
               transition={{
-                delay: i * LETTER_DELAY,
+                delay: displayDelay / 1000 + i * LETTER_DELAY,
                 times: [0, 0.1, 1],
                 duration: BOX_FADE_DURATION,
                 ease: "easeInOut",
@@ -66,6 +74,7 @@ const TypeWriter = ({ texts, swapDelay = 5500, label = "" }) => {
 
 PropTypes.TypeWriter = {
   texts: PropTypes.array.isRequired,
+  displayDelay: PropTypes.number,
   swapDelay: PropTypes.number,
   label: PropTypes.string,
 };
