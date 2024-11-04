@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
-const TypeWriter = ({
-  texts,
-  displayDelay = 0,
-  swapDelay = 5500,
-  label = "",
-}) => {
+const TypeWriter = ({ texts, displayDelay = 0, swapDelay = 5500 }) => {
   const LETTER_DELAY = 0.025;
   const BOX_FADE_DURATION = 0.125;
   const MAIN_FADE_DURATION = 0.25;
@@ -30,7 +25,6 @@ const TypeWriter = ({
 
   return (
     <p className="uppercase">
-      {label && <span className="pr-1.5">{label}:</span>}
       <span className="font-light">
         {texts[textIndex].split("").map((l, i) => (
           <motion.span
@@ -76,7 +70,6 @@ PropTypes.TypeWriter = {
   texts: PropTypes.array.isRequired,
   displayDelay: PropTypes.number,
   swapDelay: PropTypes.number,
-  label: PropTypes.string,
 };
 
 export default TypeWriter;

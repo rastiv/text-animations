@@ -10,7 +10,10 @@ const questions = [
 const TypeWriterExamples = () => {
   return (
     <div className="flex flex-col gap-1">
-      <TypeWriter label="Questions" swapDelay={6000} texts={questions} />
+      <div className="flex gap-1.5">
+        <span className="uppercase">Questions:</span>
+        <TypeWriter texts={questions} swapDelay={6000} />
+      </div>
       <div>-</div>
       <div className="flex gap-1.5">
         <span className="uppercase">Questions:</span>
