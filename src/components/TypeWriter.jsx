@@ -54,7 +54,6 @@ const TypeWriter = ({
             >
               {l}
             </motion.span>
-            {console.log(markerColor, markerColor.startsWith("bg-"))}
             <motion.span
               className={`absolute bottom-[3px] left-[1px] right-0 top-[3px] ${markerColor}`}
               initial={{ opacity: 0 }}
