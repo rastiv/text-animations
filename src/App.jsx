@@ -1,13 +1,16 @@
-import FlipTextExample from "./examples/FlipTextExample";
 import TypeWriterExamples from "./examples/TypeWriterExamples";
+import FlipTextExample from "./examples/FlipTextExample";
+import LinkBoxExample from "./examples/LinkBoxExample";
 
 function App() {
   return (
     <div className="flex flex-col h-screen items-center justify-center bg-neutral-100 px-8 py-24">
       <div className="w-full max-w-xl space-y-6">
-        <TypeWriterExamples />
-        <hr className="border-neutral-650" />
         <FlipTextExample />
+        <hr className="border-neutral-650" />
+        <LinkBoxExample />
+        <hr className="border-neutral-650" />
+        <TypeWriterExamples />
       </div>
     </div>
   );
