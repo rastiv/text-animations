@@ -1,12 +1,9 @@
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 
-const DURATION = 0.25;
 const STAGGER = 0.025;
 
-const FlipText = ({ className, children }) => {
-  if (typeof children !== "string") return;
-
+const FlipText = ({ value, duration = 0.25, className = "" }) => {
   return (
     <motion.div
       initial="initial"
@@ -14,7 +11,7 @@ const FlipText = ({ className, children }) => {
       className={`relative inline-block overflow-hidden whitespace-nowrap ${className}`}
     >
       <div>
-        {children.split("").map((c, i) => {
+        {value.split("").map((c, i) => {
           return (
             <motion.span
               key={i}
@@ -24,7 +21,7 @@ const FlipText = ({ className, children }) => {
                 hovered: { y: "-100%" },
               }}
               transition={{
-                duration: DURATION,
+                duration,
                 ease: "easeInOut",
                 delay: STAGGER * i,
               }}
@@ -35,7 +32,7 @@ const FlipText = ({ className, children }) => {
         })}
       </div>
       <div className="absolute inset-0">
-        {children.split("").map((c, i) => {
+        {value.split("").map((c, i) => {
           return (
             <motion.span
               key={i}
@@ -45,7 +42,7 @@ const FlipText = ({ className, children }) => {
                 hovered: { y: 0 },
               }}
               transition={{
-                duration: DURATION,
+                duration,
                 ease: "easeInOut",
                 delay: STAGGER * i,
               }}
@@ -60,8 +57,9 @@ const FlipText = ({ className, children }) => {
 };
 
 PropTypes.FlipText = {
+  value: PropTypes.string.isRequired,
+  duration: PropTypes.number,
   className: PropTypes.string,
-  children: PropTypes.node,
 };
 
 export default FlipText;
