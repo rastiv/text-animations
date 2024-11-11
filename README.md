@@ -1,4 +1,4 @@
-# Drag & Drop Kanban board
+# Cool text animations
 
 This WEB application demonstrates how to create cool text animations using React, Tailwindand and Framer motion.
 
